@@ -9,6 +9,7 @@ import {
   adminCreateSchema,
   type AdminCreateInput,
 } from "@/lib/validations/admin";
+import styles from "../../admin.module.css";
 
 type Admin = {
   a_id: number;
@@ -43,9 +44,9 @@ export default function AdminsPage() {
   const onSubmit = async (data: AdminCreateInput) => {
     try {
       await client.post("/admin/register", data);
-      alert("Admin created successfully!");
       reset();
       fetchAdmins();
+      alert("Admin created!");
     } catch (err: any) {
       alert(err.response?.data?.message || "Failed to create admin");
     }
@@ -53,80 +54,29 @@ export default function AdminsPage() {
 
   return (
     <div>
-      <h2 style={{ fontSize: 22, fontWeight: 800, marginBottom: 12 }}>
-        Admin Management
-      </h2>
+      <h2 className={styles.pageTitle}>Admin Management</h2>
 
-      {/* Create Admin */}
-      <div style={{ background: "#fff", padding: 16, borderRadius: 10 }}>
+      <div className={styles.card}>
         <h3 style={{ marginBottom: 10 }}>Create Admin</h3>
-
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Username"
-            type="text"
-            register={register("a_username")}
-            error={errors.a_username?.message}
-          />
+          <Input label="Username" register={register("a_username")} error={errors.a_username?.message} />
+          <Input label="Password" type="password" register={register("a_password")} error={errors.a_password?.message} />
+          <Input label="Full Name" register={register("a_fullname")} />
+          <Input label="Email" type="email" register={register("a_email")} error={errors.a_email?.message} />
 
-          <Input
-            label="Password"
-            type="password"
-            register={register("a_password")}
-            error={errors.a_password?.message}
-          />
-
-          <Input
-            label="Full Name"
-            type="text"
-            register={register("a_fullname")}
-          />
-
-          <Input
-            label="Email"
-            type="email"
-            register={register("a_email")}
-            error={errors.a_email?.message}
-          />
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            style={{
-              marginTop: 10,
-              padding: "10px 14px",
-              borderRadius: 6,
-              border: "none",
-              background: "#007bff",
-              color: "white",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
-          >
+          <button type="submit" disabled={isSubmitting} className={styles.primaryBtn}>
             {isSubmitting ? "Creating..." : "Create Admin"}
           </button>
         </form>
       </div>
 
-      {/* Admin List */}
-      <div
-        style={{
-          background: "#fff",
-          padding: 16,
-          borderRadius: 10,
-          marginTop: 16,
-        }}
-      >
+      <div className={`${styles.card} mt-4`}> {}
         <h3>Existing Admins</h3>
-
         {loading ? (
           <p>Loading...</p>
         ) : (
           admins.map((a) => (
-            <div
-              key={a.a_id}
-              style={{ padding: 8, borderBottom: "1px solid #eee" }}
-            >
+            <div key={a.a_id} className={styles.listItem}>
               <strong>{a.a_username}</strong>
               <div style={{ fontSize: 13, color: "#666" }}>
                 {a.a_fullname || "—"}

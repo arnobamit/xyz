@@ -1,0 +1,60 @@
+/* app/admin.module.css */
+.pageTitle {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  color: #111;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.listItem {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.listItemFlex {
+  composes: listItem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.primaryBtn {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #0d6efd;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.7;
+}
+
+.linkBtn {
+  font-weight: 700;
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.dashboardGrid {
+  display: grid;
+  gap: 14px;
+}
+
+.cardValue {
+  font-size: 32px;
+  margin-top: 6px;
+  font-weight: 800;
+}

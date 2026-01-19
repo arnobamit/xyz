@@ -1,25 +1,31 @@
 import { notFound } from "next/navigation";
 import { serverAxios } from "@/lib/axios/server";
+import styles from "../../../admin.module.css";
 
 export default async function AssetDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const ax = await serverAxios(); // ✅ FIX: await
+  
+  const { id } = await params; 
+  const ax = await serverAxios();
 
   try {
-    const res = await ax.get(`/assets/a/${params.id}`);
+    const res = await ax.get(`/assets/a/${id}`);
     const asset = res.data;
 
     return (
-      <div style={{ background: "#fff", borderRadius: "10px", padding: "14px" }}>
-        <h2 style={{ marginTop: 0 }}>{asset.as_name}</h2>
-        <p style={{ margin: 0 }}>Type: {asset.as_type}</p>
-        <p style={{ marginTop: "6px" }}>Status: {asset.as_status}</p>
+      <div>
+        <h2 className={styles.pageTitle}>Asset Details</h2>
+        <div className={styles.card}>
+          <h2 style={{ marginTop: 0 }}>{asset.as_name}</h2>
+          <p style={{ margin: 0 }}><strong>Type:</strong> {asset.as_type}</p>
+          <p style={{ marginTop: "6px" }}><strong>Status:</strong> {asset.as_status}</p>
+        </div>
       </div>
     );
-  } catch {
+  } catch (error) {
     notFound();
   }
 }
