@@ -25,7 +25,6 @@ export default async function AdminDashboardPage() {
         Admin Dashboard
       </h1>
 
-      {/* 🔘 ACTION BUTTONS */}
       <div style={{ display: "flex", gap: 12, marginBottom: 20 }}>
         <Link href="/admin/assets" style={btnStyle}>
           Manage Assets
@@ -40,7 +39,6 @@ export default async function AdminDashboardPage() {
         </Link>
       </div>
 
-      {/* 📊 STATS */}
       <div style={{ display: "grid", gap: 14 }}>
         <div style={cardStyle}>
           <p style={cardTitle}>Assets in system</p>
@@ -60,7 +58,6 @@ export default async function AdminDashboardPage() {
   );
 }
 
-/* 🎨 STYLES */
 
 const btnStyle = {
   padding: "10px 16px",

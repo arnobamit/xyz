@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   const body = await req.json();
 
   try {
-    // backend: POST /admin/login :contentReference[oaicite:12]{index=12}
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/admin/login`,
       body
